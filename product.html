@@ -1,73 +1,73 @@
-<!-- product.html -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>تفاصيل المنتج</title>
-  <link rel="icon" href="icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Cairo', sans-serif;
-      background: #fff;
-      color: #000;
-      padding: 1rem;
-      text-align: center;
+      margin: 0;
+      padding: 2rem;
+      background: #f5f5f5;
+      color: #333;
     }
-    .dark {
-      background: #121212;
-      color: #fff;
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
     }
     img {
       max-width: 100%;
-      border-radius: 10px;
+      height: auto;
       margin-bottom: 1rem;
+      border-radius: 10px;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
     }
     .price {
-      color: #25D366;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
+      color: green;
       margin-bottom: 1rem;
     }
-    button {
-      padding: 0.7rem 1.2rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 0.5rem;
-    }
-    .order {
-      background-color: #25D366;
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: none;
+      background: #25D366;
       color: white;
-    }
-    .back {
-      background-color: #aaa;
-      color: black;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
-  <h2 id="productTitle">اسم المنتج</h2>
-  <img id="productImage" src="" alt="صورة المنتج">
-  <div class="price" id="productPrice">٠٠ ج.م</div>
-  <button class="order" onclick="orderViaWhatsApp()">اطلب عبر واتساب</button>
-  <button class="back" onclick="history.back()">🔙 رجوع</button>
+  <div class="container">
+    <img id="productImage" src="" alt="صورة المنتج">
+    <h1 id="productTitle">عنوان المنتج</h1>
+    <div class="price" id="productPrice">السعر</div>
+    <a href="index.html" class="back-link">⬅️ الرجوع إلى الصفحة الرئيسية</a>
+  </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const title = params.get('title');
-    const price = params.get('price');
-    const image = params.get('image');
-
-    document.getElementById('productTitle').textContent = title;
-    document.getElementById('productPrice').textContent = price;
-    document.getElementById('productImage').src = image;
-
-    function orderViaWhatsApp() {
-      const phone = '+96871858099';
-      const msg = `أرغب في طلب المنتج:\n📘 *${title}*\n📷 صورة المنتج:\n${image}`;
-      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    // Function to get query parameters
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name) || '';
     }
+
+    // Set data from URL parameters
+    document.getElementById('productTitle').innerText = getQueryParam('title');
+    document.getElementById('productPrice').innerText = getQueryParam('price');
+    document.getElementById('productImage').src = getQueryParam('image');
+    document.getElementById('productImage').alt = getQueryParam('title');
   </script>
 </body>
 </html>
