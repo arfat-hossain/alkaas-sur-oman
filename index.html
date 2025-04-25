@@ -8,6 +8,7 @@
   <link rel="icon" href="icon.png">
   <meta name="theme-color" content="#333">
   <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+link: 'product.html?title=كتاب ١&price=٥٠ ج.م&image=https://via.placeholder.com/200x150'
   <style>
     body {
       margin: 0;
@@ -138,6 +139,12 @@
         category: 'books'
       }
     ];
+    
+    // Auto-generate product links
+    products = products.map(p => ({
+    ...p,
+    link: `product.html?title=${encodeURIComponent(p.title)}&price=${encodeURIComponent(p.price)}&image=${encodeURIComponent(p.image)}`
+    }));
 
     function renderProducts(filtered = products) {
       const productList = document.getElementById('productList');
