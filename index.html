@@ -69,7 +69,7 @@
     }
     .product img {
       max-width: 100%;
-      height: 450px;
+      height: 150px;
       object-fit: cover;
       border-radius: 5px;
     }
@@ -100,16 +100,10 @@
       <button onclick="toggleDarkMode()">🌓</button>
     </div>
   </header>
-   <div class="search">
-    <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
-    <select id="categoryFilter" onchange="filterProducts()">
-      <option value="all">الكل</option>
-      <option value="books">📚 كتب</option>
-      <option value="school">💻 إلكترونيات</option>
-      <option value="stationery">✏️ أدوات مكتبية</option>
-    </select>
-  </div>
 
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
+  </div>
 
   <div class="products" id="productList"></div>
 
@@ -122,72 +116,20 @@
 
     let isArabic = true;
 
-     const products = [
-       
-      { 
-        title: 'أبجدية العباقرة', 
-        price: '1.500 OMR', 
-        image: 'img/card-arabic.png',
-        link: 'https://yourdomain.com/product1'
-        category: 'books' 
-      },
-      { 
-        title: 'أبجدية العباقرة', 
-        price: '1.500 OMR', 
+    const products = [
+      {
+        title: 'كتاب ١',
+        price: '٥٠ ج.م',
         image: 'https://via.placeholder.com/200x150',
         link: 'https://yourdomain.com/product1'
-        category: 'books' 
       },
-      { 
-        title: 'أبجدية العباقرة', 
-        price: '1.500 OMR', 
+      {
+        title: 'كتاب ٢',
+        price: '٦٥ ج.م',
         image: 'https://via.placeholder.com/200x150',
-        link: 'https://yourdomain.com/product1'
-        category: 'books' 
-      },
-      { 
-        title: 'أبجدية العباقرة', 
-        price: '1.500 OMR', 
-        image: 'https://via.placeholder.com/200x150',
-        link: 'https://yourdomain.com/product1'
-        category: 'school' 
-      },
-      { 
-        title: 'أبجدية العباقرة', 
-        price: '1.500 OMR', 
-        image: 'https://via.placeholder.com/200x150',
-        link: 'https://yourdomain.com/product1'
-        category: 'school' 
-      },
-      { 
-        title: 'أبجدية العباقرة', 
-        price: '1.500 OMR', 
-        image: 'https://via.placeholder.com/200x150',
-        link: 'https://yourdomain.com/product1'
-        category: 'school' 
-      },
-      { 
-        title: 'أبجدية العباقرة', 
-        price: '1.500 OMR', 
-        image: 'https://via.placeholder.com/200x150',
-        link: 'https://yourdomain.com/product1'
-        category: 'stationery' 
-      },
-        { 
-        title: 'أبجدية العباقرة', 
-        price: '1.500 OMR', 
-        image: 'https://via.placeholder.com/200x150',
-        link: 'https://yourdomain.com/product1'
-        category: 'stationery' 
-      },
-        { 
-        title: 'أبجدية العباقرة', 
-        price: '1.500 OMR', 
-        image: 'https://via.placeholder.com/200x150',
-        link: 'https://yourdomain.com/product1'
-        category: 'stationery' 
-      },
-      
+        link: 'https://yourdomain.com/product2'
+      }
+    ];
 
     function renderProducts() {
       const productList = document.getElementById('productList');
@@ -221,14 +163,13 @@
     }
 
     function orderNow(productName, imageUrl, productLink) {
-    const phone = '8801790123456'; // ← তোমার নাম্বার
-    const message = isArabic
-    ? `أرغب في طلب المنتج:\n📘 *${productName}*\n📷 صورة المنتج:\n${imageUrl}\n🔗 رابط المنتج:\n${productLink}`
-    : `I want to order the product:\n📘 *${productName}*\n📷 Product image:\n${imageUrl}\n🔗 Product link:\n${productLink}`;
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
+      const phone = '8801790123456'; // ← তোমার নাম্বার বসাও
+      const message = isArabic
+        ? `أرغب في طلب المنتج:\n📘 *${productName}*\n📷 صورة المنتج:\n${imageUrl}\n🔗 رابط المنتج:\n${productLink}`
+        : `I want to order the product:\n📘 *${productName}*\n📷 Product image:\n${imageUrl}\n🔗 Product link:\n${productLink}`;
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
     }
-
 
     renderProducts();
   </script>
