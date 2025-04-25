@@ -140,24 +140,23 @@
     );
 
     renderProducts();
-
-    function renderProducts(filtered = products) {
-      const productList = document.getElementById('productList');
-      productList.innerHTML = '';
-      filtered.forEach(p => {
-        const productEl = document.createElement('div');
-        productEl.className = 'product';
-        productEl.innerHTML = `
-          <img src="${p.image}" alt="${p.title}">
-          <div class="product-title">${p.title}</div>
-          <div class="product-price">${p.price}</div>
-          <button class="order-btn" onclick="orderNow('${p.title}')">
-            ${isArabic ? 'اطلب عبر واتساب' : 'Order via WhatsApp'}
-          </button>
-        `;
-        productList.appendChild(productEl);
+    function renderProducts() {
+    const productList = document.getElementById('productList');
+    productList.innerHTML = '';
+    products.forEach(p => {
+    const productEl = document.createElement('div');
+    productEl.className = 'product';
+    productEl.innerHTML = `
+      <img src="${p.image}" alt="${p.title}">
+      <div class="product-title">${p.title}</div>
+      <div class="product-price">${p.price}</div>
+      <button class="order-btn" onclick="orderNow('${p.title}', '${p.image}')">
+        ${isArabic ? 'اطلب عبر واتساب' : 'Order via WhatsApp'}
+      </button>
+      `;
+      productList.appendChild(productEl);
       });
-    }
+    };
 
     function toggleLang() {
       isArabic = !isArabic;
