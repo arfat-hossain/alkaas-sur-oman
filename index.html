@@ -173,7 +173,7 @@
     }
 
     function orderNow(productName) {
-      const phone = 'YOUR_PHONE_NUMBER';
+      const phone = '0096871858099';
       const message = isArabic ? `أرغب في طلب المنتج: ${productName}` : `I want to order the product: ${productName}`;
       const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
