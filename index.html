@@ -45,10 +45,10 @@
       padding: 1rem;
       text-align: center;
     }
-    .search input {
-      width: 80%;
+    .search input, .search select {
       padding: 0.5rem;
       font-size: 1rem;
+      margin: 0.5rem;
     }
     .products {
       display: grid;
@@ -69,7 +69,7 @@
     }
     .product img {
       max-width: 100%;
-      height: 150px;
+      height: 450px;
       object-fit: cover;
       border-radius: 5px;
     }
@@ -103,6 +103,12 @@
 
   <div class="search">
     <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
+    <select id="categoryFilter" onchange="filterProducts()">
+      <option value="all">الكل</option>
+      <option value="books">📚 كتب</option>
+      <option value="school">💻 إلكترونيات</option>
+      <option value="stationery">✏️ أدوات مكتبية</option>
+    </select>
   </div>
 
   <div class="products" id="productList"></div>
@@ -121,20 +127,22 @@
         title: 'أبجدية العباقرة',
         price: '1.500 OMR',
         image: 'https://via.placeholder.com/200x150',
-        link: 'https://yourdomain.com/product1'
+        link: 'https://yourdomain.com/product1',
+        category: 'books'
       },
       {
         title: 'كتاب ٢',
         price: '٦٥ ج.م',
         image: 'https://via.placeholder.com/200x150',
-        link: 'https://yourdomain.com/product2'
+        link: 'https://yourdomain.com/product2',
+        category: 'books'
       }
     ];
 
-    function renderProducts() {
+    function renderProducts(filtered = products) {
       const productList = document.getElementById('productList');
       productList.innerHTML = '';
-      products.forEach(p => {
+      filtered.forEach(p => {
         const productEl = document.createElement('div');
         productEl.className = 'product';
         productEl.innerHTML = `
@@ -147,6 +155,12 @@
         `;
         productList.appendChild(productEl);
       });
+    }
+
+    function filterProducts() {
+      const category = document.getElementById('categoryFilter').value;
+      const filtered = category === 'all' ? products : products.filter(p => p.category === category);
+      renderProducts(filtered);
     }
 
     function toggleLang() {
@@ -163,7 +177,7 @@
     }
 
     function orderNow(productName, imageUrl, productLink) {
-      const phone = '+96871858099'; // ← তোমার নাম্বার বসাও
+      const phone = '+96871858099';
       const message = isArabic
         ? `أرغب في طلب المنتج:\n📘 *${productName}*\n📷 صورة المنتج:\n${imageUrl}\n🔗 رابط المنتج:\n${productLink}`
         : `I want to order the product:\n📘 *${productName}*\n📷 Product image:\n${imageUrl}\n🔗 Product link:\n${productLink}`;
