@@ -2,72 +2,44 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تفاصيل المنتج</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Cairo', sans-serif;
-      margin: 0;
-      padding: 2rem;
-      background: #f5f5f5;
-      color: #333;
-    }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      margin-bottom: 1rem;
-      border-radius: 10px;
-    }
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-    }
-    .price {
-      font-size: 1.2rem;
-      color: green;
-      margin-bottom: 1rem;
-    }
-    .back-link {
-      display: inline-block;
-      margin-top: 1rem;
-      text-decoration: none;
-      background: #25D366;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
+    body { font-family: 'Cairo', sans-serif; padding: 20px; direction: rtl; background: #f8f8f8; }
+    img { max-width: 100%; border-radius: 10px; margin-bottom: 20px; }
+    .product-title { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
+    .product-price { color: green; font-size: 20px; margin-bottom: 20px; }
+    .order-btn {
+      background: #25D366; color: white; border: none;
+      padding: 10px 20px; font-size: 16px;
+      border-radius: 5px; cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img id="productImage" src="" alt="صورة المنتج">
-    <h1 id="productTitle">عنوان المنتج</h1>
-    <div class="price" id="productPrice">السعر</div>
-    <a href="index.html" class="back-link">⬅️ الرجوع إلى الصفحة الرئيسية</a>
+  <div id="product-details">
+    <img id="productImage" src="" alt="">
+    <div class="product-title" id="productTitle"></div>
+    <div class="product-price" id="productPrice"></div>
+    <button class="order-btn" onclick="orderNow()">اطلب عبر واتساب</button>
   </div>
 
   <script>
-    // Function to get query parameters
-    function getQueryParam(name) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(name) || '';
-    }
+    const urlParams = new URLSearchParams(window.location.search);
+    const title = urlParams.get('title');
+    const price = urlParams.get('price');
+    const image = urlParams.get('image');
 
-    // Set data from URL parameters
-    document.getElementById('productTitle').innerText = getQueryParam('title');
-    document.getElementById('productPrice').innerText = getQueryParam('price');
-    document.getElementById('productImage').src = getQueryParam('image');
-    document.getElementById('productImage').alt = getQueryParam('title');
+    document.getElementById('productTitle').innerText = title;
+    document.getElementById('productPrice').innerText = price;
+    document.getElementById('productImage').src = image;
+
+    function orderNow() {
+      const phone = '8801790123456'; // আপনার নম্বর দিন
+      const message = `أرغب في طلب المنتج:\n📘 *${title}*\n💰 السعر: ${price}\n📷 صورة:\n${image}`;
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
   </script>
 </body>
 </html>
