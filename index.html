@@ -127,22 +127,20 @@
         title: 'كتاب ١',
         price: '٥٠ ج.م',
         image: 'https://via.placeholder.com/200x150',
-        link: 'https://yourdomain.com/product1',
         category: 'books'
       },
       {
         title: 'كتاب ٢',
         price: '٦٥ ج.م',
         image: 'https://via.placeholder.com/200x150',
-        link: 'https://yourdomain.com/product2',
         category: 'books'
       }
     ];
 
     const baseURL = window.location.origin;
     products = products.map(p => ({
-    ...p,
-    link: `${baseURL}/product.html?title=${encodeURIComponent(p.title)}&price=${encodeURIComponent(p.price)}&image=${encodeURIComponent(p.image)}`
+      ...p,
+      link: `${baseURL}/product.html?title=${encodeURIComponent(p.title)}&price=${encodeURIComponent(p.price)}&image=${encodeURIComponent(p.image)}`
     }));
 
     function renderProducts(filtered = products) {
@@ -155,7 +153,7 @@
           <a href="${p.link}"><img src="${p.image}" alt="${p.title}"></a>
           <div class="product-title">${p.title}</div>
           <div class="product-price">${p.price}</div>
-          <button class="order-btn" onclick="orderNow('${p.title}', '${p.image}', '${p.link}')">
+          <button class="order-btn" onclick="orderNow('${encodeURIComponent(p.title)}', '${encodeURIComponent(p.image)}', '${encodeURIComponent(p.link)}')">
             ${isArabic ? 'اطلب عبر واتساب' : 'Order via WhatsApp'}
           </button>
         `;
@@ -188,10 +186,15 @@
     }
 
     function orderNow(productName, imageUrl, productLink) {
-      const phone = '+96871858099';
+      const phone = '8801790123456';
+      const decodedName = decodeURIComponent(productName);
+      const decodedImage = decodeURIComponent(imageUrl);
+      const decodedLink = decodeURIComponent(productLink);
+
       const message = isArabic
-        ? `أرغب في طلب المنتج:\n📘 *${productName}*\n📷 صورة المنتج:\n${imageUrl}\n🔗 رابط المنتج:\n${productLink}`
-        : `I want to order the product:\n📘 *${productName}*\n📷 Product image:\n${imageUrl}\n🔗 Product link:\n${productLink}`;
+        ? `أرغب في طلب المنتج:\n📘 *${decodedName}*\n📷 صورة المنتج:\n${decodedImage}\n🔗 رابط المنتج:\n${decodedLink}`
+        : `I want to order the product:\n📘 *${decodedName}*\n📷 Product image:\n${decodedImage}\n🔗 Product link:\n${decodedLink}`;
+
       const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
     }
