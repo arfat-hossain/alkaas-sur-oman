@@ -106,7 +106,7 @@
     <select id="categoryFilter" onchange="filterProducts()">
       <option value="all">الكل</option>
       <option value="books">📚 كتب</option>
-      <option value="electronics">💻 إلكترونيات</option>
+      <option value="school">💻 إلكترونيات</option>
       <option value="stationery">✏️ أدوات مكتبية</option>
     </select>
   </div>
@@ -124,16 +124,22 @@
 
     let products = [
       {
-        title: 'كتاب ١',
-        price: '٥٠ ج.م',
-        image: 'https://via.placeholder.com/200x150',
+        title: 'أبجدية العباقرة',
+        price: '1.500 OMR',
+        image: 'card-arabic.png',
         category: 'books'
       },
       {
-        title: 'كتاب ٢',
-        price: '٦٥ ج.م',
-        image: 'https://via.placeholder.com/200x150',
-        category: 'books'
+        title: 'أبجدية العباقرة',
+        price: '1.900 OMR',
+        image: 'card-arabic.png',
+        category: 'school'
+      }
+      {
+        title: 'أبجدية العباقرة',
+        price: '2.000 OMR',
+        image: 'card-arabic.png',
+        category: 'stationery'
       }
     ];
 
@@ -186,7 +192,7 @@
     }
 
     function orderNow(productName, imageUrl, productLink) {
-      const phone = '8801790123456';
+      const phone = '+96871858099';
       const decodedName = decodeURIComponent(productName);
       const decodedImage = decodeURIComponent(imageUrl);
       const decodedLink = decodeURIComponent(productLink);
